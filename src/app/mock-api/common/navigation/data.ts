@@ -11,7 +11,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
     },
     {
         id      : 'salehall',
-        title   : 'AddSall',
+        title   : 'AddHall',
         type    : 'basic',
         icon    : 'mat_outline:store',
         link    : '/salehall'

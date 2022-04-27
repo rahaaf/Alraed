@@ -75,8 +75,8 @@ export const appRoutes: Route[] = [
         },
         children   : [
             {path: 'contacts', loadChildren: () => import('app/modules/admin/contacts/contacts.module').then(m => m.ContactsModule)},
-            {path: 'contactshall', loadChildren: () => import('app/modules/admin/contactshall/contacts.module').then(m => m.ContactsModule)},
-            {path: 'storehouse', loadChildren: () => import('app/modules/admin/addstorehouse/ecommerce.module').then(m => m.ECommerceModule)},
+            {path: 'contactshall', loadChildren: () => import('app/modules/admin/contactshall/contacts.module').then(c => c.ContactsModule)},
+            {path: 'storehouse', loadChildren: () => import('app/modules/admin/addstorehouse/ecommerce.module').then(s => s.ECommerceModule)},
             {path: 'salehall', loadChildren: () => import('app/modules/admin/addsalehall/ecommerce.module').then(h => h.ECommerceModule)},
         ]
     },

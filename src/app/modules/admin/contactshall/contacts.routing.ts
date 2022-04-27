@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
-import { CanDeactivateContactsDetails } from 'app/modules/admin/contacts/contacts.guards';
-import { ContactsContactResolver, ContactsCountriesResolver, ContactsResolver, ContactsTagsResolver } from 'app/modules/admin/contacts/contacts.resolvers';
-import { ContactsComponent } from 'app/modules/admin/contacts/contacts.component';
+import { CanDeactivateContactsDetails } from 'app/modules/admin/contactshall/contacts.guards';
+import { ContactsContactResolver, ContactsCountriesResolver, ContactsResolver, ContactsTagsResolver } from 'app/modules/admin/contactshall/contacts.resolvers';
+import { ContactsComponent } from 'app/modules/admin/contactshall/contacts.component';
 import { ContactsListComponent } from 'app/modules/admin/contactshall/list/list.component';
 import { ContactsDetailsComponent } from 'app/modules/admin/contactshall/details/details.component';
 

@@ -76,12 +76,12 @@
                         </div>
                         <!-- Rows -->
                         <ng-container *ngIf="(products$ | async) as products">
-                            <ng-container *ngFor="let product of products; trackBy: trackByFn">
+                            <ng-container *ngFor="let product of products; trackBy: trackByFn let i= index">
                                 <div class="inventory-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b">
 
                                     <!-- ID -->
-                                    <div class=" truncate">
-                                        {{product.id}}
+                                    <div class=" truncate"  >
+                                        {{ i+1 }}
                                     </div>
 
                                     <!-- Name -->

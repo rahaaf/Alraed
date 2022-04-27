@@ -16,7 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from 'app/shared/shared.module';
 import { InventoryComponent } from 'app/modules/admin/addsalehall/salehall/inventory.component';
 import { InventoryListComponent } from 'app/modules/admin/addsalehall/salehall/list/inventory.component';
-import { ecommerceRoutes } from 'app/modules/admin/addstorehouse/ecommerce.routing';
+import { ecommerceRoutes } from 'app/modules/admin/addsalehall/ecommerce.routing';
 
 @NgModule({
     declarations: [
