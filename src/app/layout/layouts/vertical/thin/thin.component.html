@@ -14,8 +14,8 @@
         <!-- Logo -->
         <div class="flex items-center justify-center h-20">
             <img
-                class="w-8"
-                src="assets/images/logo/logo.svg"
+                class="w-8" style="width: 5rem !important;"
+                src="assets/images/logo/3.png"
                 alt="Logo image">
         </div>
     </ng-container>
@@ -38,15 +38,7 @@
             <languages></languages>
             <fuse-fullscreen class="hidden md:block"></fuse-fullscreen>
             <search [appearance]="'bar'"></search>
-            <shortcuts></shortcuts>
-            <messages></messages>
             <notifications></notifications>
-            <button
-                class="lg:hidden"
-                mat-icon-button
-                (click)="quickChat.toggle()">
-                <mat-icon [svgIcon]="'heroicons_outline:chat-alt-2'"></mat-icon>
-            </button>
             <user></user>
         </div>
     </div>
@@ -65,5 +57,4 @@
 
 </div>
 
-<!-- Quick chat -->
-<quick-chat #quickChat="quickChat"></quick-chat>
+

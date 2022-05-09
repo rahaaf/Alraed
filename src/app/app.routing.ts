@@ -9,7 +9,7 @@ import { InitialDataResolver } from 'app/app.resolvers';
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 export const appRoutes: Route[] = [
 
-    // Redirect empty path to '/storehouse'
+    // Redirect empty path to 'home'
     {path: '', pathMatch : 'full', redirectTo: 'storehouse'},
 
     // Redirect signed in user to the '/storehouse'

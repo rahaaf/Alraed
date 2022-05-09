@@ -13,8 +13,8 @@
         <!-- Logo -->
         <div class="flex items-center h-20 p-6 pb-0">
             <img
-                class="w-30"
-                src="assets/images/logo/logo-text-on-dark.svg">
+                class="w-30" style="width: 5rem !important;"
+                src="assets/images/logo/3.png">
         </div>
     </ng-container>
     <!-- Navigation footer hook -->
@@ -51,15 +51,8 @@
             <languages></languages>
             <fuse-fullscreen class="hidden md:block"></fuse-fullscreen>
             <search [appearance]="'bar'"></search>
-            <shortcuts></shortcuts>
-            <messages></messages>
             <notifications></notifications>
-            <button
-                class="lg:hidden"
-                mat-icon-button
-                (click)="quickChat.toggle()">
-                <mat-icon [svgIcon]="'heroicons_outline:chat-alt-2'"></mat-icon>
-            </button>
+
         </div>
     </div>
 
@@ -77,5 +70,3 @@
 
 </div>
 
-<!-- Quick chat -->
-<quick-chat #quickChat="quickChat"></quick-chat>
