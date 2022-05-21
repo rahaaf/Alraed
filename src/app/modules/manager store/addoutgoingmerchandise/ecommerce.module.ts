@@ -17,6 +17,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { InventoryComponent } from 'app/modules/manager store/addoutgoingmerchandise/addoutgoingmerchandise/inventory.component';
 import { InventoryListComponent } from 'app/modules/manager store/addoutgoingmerchandise/addoutgoingmerchandise/list/inventory.component';
 import { ecommerceRoutes } from 'app/modules/manager store/addoutgoingmerchandise/ecommerce.routing';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import { ecommerceRoutes } from 'app/modules/manager store/addoutgoingmerchandis
         MatSelectModule,
         MatSlideToggleModule,
         MatTooltipModule,
+        TranslocoModule,
         SharedModule
     ]
 })

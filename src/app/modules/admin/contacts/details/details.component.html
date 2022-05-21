@@ -50,7 +50,7 @@
                             <mat-icon
                                 class="icon-size-5"
                                 [svgIcon]="'heroicons_solid:pencil-alt'"></mat-icon>
-                            <span class="ml-2">Edit</span>
+                            <span class="ml-2" *transloco="let t">{{t('Edit')}}</span>
                         </button>
                     </div>
                 </div>
@@ -248,8 +248,9 @@
 
                     <!-- Name -->
                     <div class="mt-8">
-                        <mat-form-field class="fuse-mat-no-subscript w-full">
-                            <mat-label>Name</mat-label>
+                        <mat-form-field class="fuse-mat-no-subscript w-full"
+                        *transloco="let t">
+                            <mat-label>{{t('Name')}}</mat-label>
                             <mat-icon
                                 matPrefix
                                 class="hidden sm:flex icon-size-5"
@@ -257,7 +258,7 @@
                             <input
                                 matInput
                                 [formControlName]="'name'"
-                                [placeholder]="'Name'"
+                                [placeholder]="'Name' | transloco"
                                 [spellcheck]="false">
                         </mat-form-field>
                     </div>
@@ -282,14 +283,14 @@
                                 <mat-icon
                                     class="icon-size-5"
                                     [svgIcon]="'heroicons_solid:pencil-alt'"></mat-icon>
-                                <span class="ml-1.5 text-md font-medium whitespace-nowrap">Edit</span>
+                                <span class="ml-1.5 text-md font-medium whitespace-nowrap" *transloco="let t">{{t('Edit')}}</span>
                             </ng-container>
 
                             <ng-container *ngIf="!contact.tags.length">
                                 <mat-icon
                                     class="icon-size-5"
                                     [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
-                                <span class="ml-1.5 text-md font-medium whitespace-nowrap">Add</span>
+                                <span class="ml-1.5 text-md font-medium whitespace-nowrap" *transloco="let t">{{t('Add')}}</span>
                             </ng-container>
 
                             <!-- Tags panel -->
@@ -305,7 +306,7 @@
                                                 <input
                                                     class="w-full min-w-0 py-1 border-0"
                                                     type="text"
-                                                    placeholder="Enter tag name"
+                                                    [placeholder]="'Enter tag name' | transloco"
                                                     (input)="filterTags($event)"
                                                     (keydown)="filterTagsInputKeyDown($event)"
                                                     [maxLength]="30"
@@ -377,7 +378,7 @@
                                             <mat-icon
                                                 class="mr-2 icon-size-5"
                                                 [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
-                                            <div class="break-all">Create "<b>{{newTagInput.value}}</b>"</div>
+                                            <div class="break-all" *transloco="let t">{{t('Create')}} "<b>{{newTagInput.value}}</b>"</div>
                                         </div>
                                     </div>
                                 </div>
@@ -387,8 +388,8 @@
 
                     <!-- Title -->
                     <div class="mt-8">
-                        <mat-form-field class="fuse-mat-no-subscript w-full">
-                            <mat-label>Title</mat-label>
+                        <mat-form-field class="fuse-mat-no-subscript w-full" *transloco="let t">
+                            <mat-label>{{t('Title')}}</mat-label>
                             <mat-icon
                                 matPrefix
                                 class="hidden sm:flex icon-size-5"
@@ -396,14 +397,14 @@
                             <input
                                 matInput
                                 [formControlName]="'title'"
-                                [placeholder]="'Job title'">
+                                [placeholder]="'Job title' |transloco">
                         </mat-form-field>
                     </div>
 
                     <!-- Company -->
                     <div class="mt-8">
-                        <mat-form-field class="fuse-mat-no-subscript w-full">
-                            <mat-label>Company</mat-label>
+                        <mat-form-field class="fuse-mat-no-subscript w-full" *transloco="let t">
+                            <mat-label>{{t('Company')}}</mat-label>
                             <mat-icon
                                 matPrefix
                                 class="hidden sm:flex icon-size-5"
@@ -411,7 +412,7 @@
                             <input
                                 matInput
                                 [formControlName]="'company'"
-                                [placeholder]="'Company'">
+                                [placeholder]="'Company' |transloco">
                         </mat-form-field>
                     </div>
 
@@ -420,8 +421,8 @@
                         <div class="space-y-4">
                             <ng-container *ngFor="let email of contactForm.get('emails')['controls']; let i = index; let first = first; let last = last; trackBy: trackByFn">
                                 <div class="flex">
-                                    <mat-form-field class="fuse-mat-no-subscript flex-auto">
-                                        <mat-label *ngIf="first">Email</mat-label>
+                                    <mat-form-field class="fuse-mat-no-subscript flex-auto" *transloco="let t">
+                                        <mat-label *ngIf="first">{{t('Email')}}</mat-label>
                                         <mat-icon
                                             matPrefix
                                             class="hidden sm:flex icon-size-5"
@@ -429,11 +430,11 @@
                                         <input
                                             matInput
                                             [formControl]="email.get('email')"
-                                            [placeholder]="'Email address'"
+                                            [placeholder]="'Email address' |transloco"
                                             [spellcheck]="false">
                                     </mat-form-field>
-                                    <mat-form-field class="fuse-mat-no-subscript flex-auto w-full max-w-24 sm:max-w-40 ml-2 sm:ml-4">
-                                        <mat-label *ngIf="first">Label</mat-label>
+                                    <mat-form-field class="fuse-mat-no-subscript flex-auto w-full max-w-24 sm:max-w-40 ml-2 sm:ml-4" *transloco="let t">
+                                        <mat-label *ngIf="first">{{t('Label')}}</mat-label>
                                         <mat-icon
                                             matPrefix
                                             class="hidden sm:flex icon-size-5"
@@ -441,7 +442,7 @@
                                         <input
                                             matInput
                                             [formControl]="email.get('label')"
-                                            [placeholder]="'Label'">
+                                            [placeholder]="'Label' |transloco">
                                     </mat-form-field>
                                     <!-- Remove email -->
                                     <ng-container *ngIf="!(first && last)">
@@ -468,7 +469,7 @@
                             <mat-icon
                                 class="icon-size-5"
                                 [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
-                            <span class="ml-2 font-medium text-secondary group-hover:underline">Add an email address</span>
+                            <span class="ml-2 font-medium text-secondary group-hover:underline" *transloco="let t">{{t('Add an email address')}}</span>
                         </div>
                     </div>
 
@@ -477,12 +478,12 @@
                         <div class="space-y-4">
                             <ng-container *ngFor="let phoneNumber of contactForm.get('phoneNumbers')['controls']; let i = index; let first = first; let last = last; trackBy: trackByFn">
                                 <div class="relative flex">
-                                    <mat-form-field class="fuse-mat-no-subscript flex-auto">
-                                        <mat-label *ngIf="first">Phone</mat-label>
+                                    <mat-form-field class="fuse-mat-no-subscript flex-auto" *transloco="let t">
+                                        <mat-label *ngIf="first">{{t('Phone')}}</mat-label>
                                         <input
                                             matInput
                                             [formControl]="phoneNumber.get('phoneNumber')"
-                                            [placeholder]="'Phone'">
+                                            [placeholder]="'Phone' |transloco">
                                         <mat-select
                                             class="mr-1.5"
                                             [formControl]="phoneNumber.get('country')"
@@ -512,8 +513,8 @@
                                             </ng-container>
                                         </mat-select>
                                     </mat-form-field>
-                                    <mat-form-field class="fuse-mat-no-subscript flex-auto w-full max-w-24 sm:max-w-40 ml-2 sm:ml-4">
-                                        <mat-label *ngIf="first">Label</mat-label>
+                                    <mat-form-field class="fuse-mat-no-subscript flex-auto w-full max-w-24 sm:max-w-40 ml-2 sm:ml-4" *transloco="let t">
+                                        <mat-label *ngIf="first">{{t('Label')}}</mat-label>
                                         <mat-icon
                                             matPrefix
                                             class="hidden sm:flex icon-size-5"
@@ -521,7 +522,7 @@
                                         <input
                                             matInput
                                             [formControl]="phoneNumber.get('label')"
-                                            [placeholder]="'Label'">
+                                            [placeholder]="'Label' |transloco">
                                     </mat-form-field>
                                     <!-- Remove phone number -->
                                     <ng-container *ngIf="!(first && last)">
@@ -548,14 +549,14 @@
                             <mat-icon
                                 class="icon-size-5"
                                 [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
-                            <span class="ml-2 font-medium text-secondary group-hover:underline">Add a phone number</span>
+                            <span class="ml-2 font-medium text-secondary group-hover:underline" *transloco="let t">{{t('Add a phone number')}}</span>
                         </div>
                     </div>
 
                     <!-- Address -->
                     <div class="mt-8">
-                        <mat-form-field class="fuse-mat-no-subscript w-full">
-                            <mat-label>Address</mat-label>
+                        <mat-form-field class="fuse-mat-no-subscript w-full" *transloco="let t">
+                            <mat-label>{{t('Address')}}</mat-label>
                             <mat-icon
                                 matPrefix
                                 class="hidden sm:flex icon-size-5"
@@ -563,14 +564,14 @@
                             <input
                                 matInput
                                 [formControlName]="'address'"
-                                [placeholder]="'Address'">
+                                [placeholder]="'Address' |transloco">
                         </mat-form-field>
                     </div>
 
                     <!-- Birthday -->
                     <div class="mt-8">
-                        <mat-form-field class="fuse-mat-no-subscript w-full">
-                            <mat-label>Birthday</mat-label>
+                        <mat-form-field class="fuse-mat-no-subscript w-full" *transloco="let t">
+                            <mat-label>{{t('Birthday')}}</mat-label>
                             <mat-icon
                                 matPrefix
                                 class="hidden sm:flex icon-size-5"
@@ -579,7 +580,7 @@
                                 matInput
                                 [matDatepicker]="birthdayDatepicker"
                                 [formControlName]="'birthday'"
-                                [placeholder]="'Birthday'">
+                                [placeholder]="'Birthday' |transloco">
                             <mat-datepicker-toggle
                                 matSuffix
                                 [for]="birthdayDatepicker">
@@ -590,8 +591,8 @@
 
                     <!-- Notes -->
                     <div class="mt-8">
-                        <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
-                            <mat-label>Notes</mat-label>
+                        <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full" *transloco="let t">
+                            <mat-label>{{t('Notes')}}</mat-label>
                             <mat-icon
                                 matPrefix
                                 class="hidden sm:flex icon-size-5"
@@ -599,7 +600,7 @@
                             <textarea
                                 matInput
                                 [formControlName]="'notes'"
-                                [placeholder]="'Notes'"
+                                [placeholder]="'Notes' |transloco"
                                 [rows]="5"
                                 [spellcheck]="false"
                                 matTextareaAutosize></textarea>
@@ -610,29 +611,32 @@
                     <div class="flex items-center mt-10 -mx-6 sm:-mx-12 py-4 pr-4 pl-1 sm:pr-12 sm:pl-7 border-t bg-gray-50 dark:bg-transparent">
                         <!-- Delete -->
                         <button
+                        *transloco="let t"
                             mat-button
                             [color]="'warn'"
                             [matTooltip]="'Delete'"
                             (click)="deleteContact()">
-                            Delete
+                            {{t('Delete')}}
                         </button>
                         <!-- Cancel -->
                         <button
+                        *transloco="let t"
                             class="ml-auto"
                             mat-button
                             [matTooltip]="'Cancel'"
                             (click)="toggleEditMode(false)">
-                            Cancel
+                            {{t('Cancel')}}
                         </button>
                         <!-- Save -->
                         <button
+                        *transloco="let t"
                             class="ml-2"
                             mat-flat-button
                             [color]="'primary'"
                             [disabled]="contactForm.invalid"
                             [matTooltip]="'Save'"
                             (click)="updateContact()">
-                            Save
+                            {{t('Save')}}
                         </button>
                     </div>
 

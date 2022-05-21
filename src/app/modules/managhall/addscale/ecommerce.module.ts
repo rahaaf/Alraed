@@ -17,6 +17,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { InventoryComponent } from 'app/modules/managhall/addscale/addscale/inventory.component';
 import { InventoryListComponent } from 'app/modules/managhall/addscale/addscale/list/inventory.component';
 import { ecommerceRoutes } from 'app/modules/managhall/addscale/ecommerce.routing';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import { ecommerceRoutes } from 'app/modules/managhall/addscale/ecommerce.routin
         MatSelectModule,
         MatSlideToggleModule,
         MatTooltipModule,
+        TranslocoModule,
         SharedModule
     ]
 })

@@ -2,7 +2,6 @@ import { Translation, TRANSLOCO_CONFIG, TRANSLOCO_LOADER, translocoConfig, Trans
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { environment } from 'environments/environment';
 import { TranslocoHttpLoader } from 'app/core/transloco/transloco.http-loader';
-
 @NgModule({
     exports  : [
         TranslocoModule
@@ -18,8 +17,8 @@ import { TranslocoHttpLoader } from 'app/core/transloco/transloco.http-loader';
                         label: 'English'
                     },
                     {
-                        id   : 'tr',
-                        label: 'Turkish'
+                        id   : 'ar',
+                        label: 'Arabic'
                     }
                 ],
                 defaultLang         : 'en',

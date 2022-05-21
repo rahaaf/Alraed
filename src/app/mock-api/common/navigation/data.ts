@@ -44,13 +44,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon    : 'mat_outline:store',
         link    : '/addoutgoingmer'
     },
-    {
-        id   : 'addtransport',
-        title: 'Addtransport',
-        type : 'basic',
-        icon : 'heroicons_outline:user-group',
-        link : '/addtransport'
-    },
+    // {
+    //     id   : 'addtransport',
+    //     title: 'Addtransport',
+    //     type : 'basic',
+    //     icon : 'heroicons_outline:user-group',
+    //     link : '/addtransport'
+    // },
     {
         id      : 'addedgoods',
         title   : 'Addgoodshall',

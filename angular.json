@@ -43,11 +43,13 @@
                                 "output": "/"
                             }
                         ],
+
                         "stylePreprocessorOptions": {
                             "includePaths": [
                                 "src/@fuse/styles"
                             ]
                         },
+
                         "styles": [
                             "src/@fuse/styles/tailwind.scss",
                             "src/@fuse/styles/themes.scss",
@@ -88,6 +90,8 @@
                             "sourceMap": true,
                             "namedChunks": true
                         }
+
+
                     },
                     "defaultConfiguration": "production"
                 },
@@ -122,8 +126,21 @@
                             "src/favicon-32x32.png",
                             "src/assets"
                         ],
+                        "extractCss" :"true",
                         "styles": [
-                            "src/styles/styles.scss"
+                            "src/styles/styles.scss",
+                            {
+                               "input": "src/language-css/ar.scss",
+                               "bundleName": "ar",
+                                 "inject": true
+
+                            },
+                            {
+                                "input": "src/language-css/en.scss",
+                                "bundleName": "en",
+                                  "inject": true
+
+                             }
                         ],
                         "scripts": []
                     }

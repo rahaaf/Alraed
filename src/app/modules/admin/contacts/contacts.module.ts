@@ -23,6 +23,8 @@ import { contactsRoutes } from 'app/modules/admin/contacts/contacts.routing';
 import { ContactsComponent } from 'app/modules/admin/contacts/contacts.component';
 import { ContactsDetailsComponent } from 'app/modules/admin/contacts/details/details.component';
 import { ContactsListComponent } from 'app/modules/admin/contacts/list/list.component';
+import { TranslocoModule } from '@ngneat/transloco';
+
 
 @NgModule({
     declarations: [
@@ -49,6 +51,7 @@ import { ContactsListComponent } from 'app/modules/admin/contacts/list/list.comp
         MatTableModule,
         MatTooltipModule,
         FuseFindByKeyPipeModule,
+        TranslocoModule,
         SharedModule
     ],
     providers   : [

@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { take } from 'rxjs';
 import { AvailableLangs, TranslocoService } from '@ngneat/transloco';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
     selector       : 'languages',
@@ -22,7 +23,8 @@ export class LanguagesComponent implements OnInit, OnDestroy
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseNavigationService: FuseNavigationService,
-        private _translocoService: TranslocoService
+        private _translocoService: TranslocoService,
+        @Inject(DOCUMENT) private document: Document,
     )
     {
     }
@@ -52,7 +54,7 @@ export class LanguagesComponent implements OnInit, OnDestroy
         // Set the country iso codes for languages for flags
         this.flagCodes = {
             'en': 'us',
-            'tr': 'tr'
+            'ar': 'sy'
         };
     }
 
@@ -75,7 +77,28 @@ export class LanguagesComponent implements OnInit, OnDestroy
     setActiveLang(lang: string): void
     {
         // Set the active lang
+        const htmlTag = this.document.getElementsByTagName('html')[0] as HTMLHtmlElement;
+        htmlTag.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        this._translocoService.setDefaultLang(lang);
+        this._translocoService.getTranslation(lang);
+        this.changeCssFile(lang);
         this._translocoService.setActiveLang(lang);
+    }
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    changeCssFile(lang: string) {
+ const headTag = this.document.getElementsByTagName('head')[0] as HTMLHeadElement;
+const existingLink = this.document.getElementById('langCss') as HTMLLinkElement;
+const bundleName = lang === 'ar' ?       'ar.scss':'en.scss';
+if (existingLink) {
+   existingLink.href = bundleName;
+} else {
+   const newLink = this.document.createElement('link');
+   newLink.rel = 'stylesheet';
+   newLink.type = 'text/css';
+   newLink.id = 'langCss';
+   newLink.href = bundleName;
+   headTag.appendChild(newLink);
+}
     }
 
     /**
@@ -121,10 +144,10 @@ export class LanguagesComponent implements OnInit, OnDestroy
         const navigation = navComponent.navigation;
 
         // Get the Project dashboard item and update its title
-        const projectDashboardItem = this._fuseNavigationService.getItem('dashboards.project', navigation);
+        const projectDashboardItem = this._fuseNavigationService.getItem('storehouse', navigation);
         if ( projectDashboardItem )
         {
-            this._translocoService.selectTranslate('Project').pipe(take(1))
+            this._translocoService.selectTranslate('AddStore').pipe(take(1))
                 .subscribe((translation) => {
 
                     // Set the title
@@ -136,14 +159,112 @@ export class LanguagesComponent implements OnInit, OnDestroy
         }
 
         // Get the Analytics dashboard item and update its title
-        const analyticsDashboardItem = this._fuseNavigationService.getItem('dashboards.analytics', navigation);
+        const analyticsDashboardItem = this._fuseNavigationService.getItem('salehall', navigation);
         if ( analyticsDashboardItem )
         {
-            this._translocoService.selectTranslate('Analytics').pipe(take(1))
+            this._translocoService.selectTranslate('AddHall').pipe(take(1))
                 .subscribe((translation) => {
 
                     // Set the title
                     analyticsDashboardItem.title = translation;
+
+                    // Refresh the navigation component
+                    navComponent.refresh();
+                });
+        }
+                // Get the Contacts dashboard item and update its title
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const ContactsDashboardItem = this._fuseNavigationService.getItem('contacts', navigation);
+        if ( ContactsDashboardItem )
+        {
+            this._translocoService.selectTranslate('Contactstore').pipe(take(1))
+                .subscribe((translation) => {
+
+                    // Set the title
+                    ContactsDashboardItem.title = translation;
+
+                    // Refresh the navigation component
+                    navComponent.refresh();
+                });
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const ContactshallItem = this._fuseNavigationService.getItem('contactshall', navigation);
+        if ( ContactshallItem )
+        {
+            this._translocoService.selectTranslate('Contactshall').pipe(take(1))
+                .subscribe((translation) => {
+
+                    // Set the title
+                    ContactshallItem.title = translation;
+
+                    // Refresh the navigation component
+                    navComponent.refresh();
+                });
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const AddorderItem = this._fuseNavigationService.getItem('addorder', navigation);
+        if ( AddorderItem )
+        {
+            this._translocoService.selectTranslate('Addorder').pipe(take(1))
+                .subscribe((translation) => {
+
+                    // Set the title
+                    AddorderItem.title = translation;
+
+                    // Refresh the navigation component
+                    navComponent.refresh();
+                });
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const AddgoodshallItem = this._fuseNavigationService.getItem('addedgoods', navigation);
+        if ( ContactshallItem )
+        {
+            this._translocoService.selectTranslate('Addgoodshall').pipe(take(1))
+                .subscribe((translation) => {
+
+                    // Set the title
+                    AddgoodshallItem.title = translation;
+
+                    // Refresh the navigation component
+                    navComponent.refresh();
+                });
+        }
+        const addoutgoingmerItem = this._fuseNavigationService.getItem('addoutgoingmer', navigation);
+        if ( addoutgoingmerItem )
+        {
+            this._translocoService.selectTranslate('Addoutgoingmer').pipe(take(1))
+                .subscribe((translation) => {
+
+                    // Set the title
+                    addoutgoingmerItem.title = translation;
+
+                    // Refresh the navigation component
+                    navComponent.refresh();
+                });
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const AddgoodsstoreItem = this._fuseNavigationService.getItem('addgoods', navigation);
+        if ( AddgoodsstoreItem )
+        {
+            this._translocoService.selectTranslate('Addgoodsstore').pipe(take(1))
+                .subscribe((translation) => {
+
+                    // Set the title
+                    AddgoodsstoreItem.title = translation;
+
+                    // Refresh the navigation component
+                    navComponent.refresh();
+                });
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const AddscalItem = this._fuseNavigationService.getItem('addscale', navigation);
+        if ( AddscalItem )
+        {
+            this._translocoService.selectTranslate('Addscale').pipe(take(1))
+                .subscribe((translation) => {
+
+                    // Set the title
+                    AddscalItem.title = translation;
 
                     // Refresh the navigation component
                     navComponent.refresh();
