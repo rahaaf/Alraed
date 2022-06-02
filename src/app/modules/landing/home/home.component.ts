@@ -1,38 +1,49 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, QueryList, Renderer2, ViewChildren, ViewEncapsulation } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import {Component, ElementRef, QueryList, Renderer2, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { FuseCardComponent } from '@fuse/components/card';
+import { InventoryProduct } from 'app/modules/managhall/addgoods/addgoods/inventory.types';
+import SwiperCore, { FreeMode, Navigation, Thumbs} from 'swiper';
+import { HomeService } from './home.service';
+
+SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
 @Component({
     selector     : 'landing-home',
     templateUrl  : './home.component.html',
-    styles         : [
-        `
-            cards fuse-card {
-                margin: 16px;
-            }
-        `
-    ],
+    styleUrls    : ['./home.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class LandingHomeComponent
 {
-    @ViewChildren(FuseCardComponent, {read: ElementRef}) private _fuseCards: QueryList<ElementRef>;
 
-    filters: string[] = ['all', 'article', 'interactive'];
+    @ViewChildren(FuseCardComponent, {read: ElementRef}) private _fuseCards: QueryList<ElementRef>;
+    thumbsSwiper: any;
+    filters: string[] = ['all', 'sofa', 'room', 'roomfamily'];
     numberOfCards: any = {};
     selectedFilter: string = 'all';
-
+    items = ['4','5','6'];
+    products: InventoryProduct[];
     /**
      * Constructor
      */
-    constructor(private _renderer2: Renderer2)
+    constructor(private _renderer2: Renderer2,
+        private homeservice: HomeService)
     {
     }
-
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
+     // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
+     ngOnInit(): void {
+         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+         //Add 'implements OnInit' to the class.
+        this.homeservice.getProducts().subscribe((res)=>{
+            this.products = res['products'];
+            console.log(this.products);
+        });
 
+    }
     /**
      * After view init
      */
@@ -128,4 +139,8 @@ export class LandingHomeComponent
             }
         });
     }
+
+    // eslint-disable-next-line @typescript-eslint/member-ordering
 }
+
+

@@ -86,19 +86,19 @@ export class LanguagesComponent implements OnInit, OnDestroy
     }
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     changeCssFile(lang: string) {
- const headTag = this.document.getElementsByTagName('head')[0] as HTMLHeadElement;
-const existingLink = this.document.getElementById('langCss') as HTMLLinkElement;
-const bundleName = lang === 'ar' ?       'ar.scss':'en.scss';
-if (existingLink) {
-   existingLink.href = bundleName;
-} else {
-   const newLink = this.document.createElement('link');
-   newLink.rel = 'stylesheet';
-   newLink.type = 'text/css';
-   newLink.id = 'langCss';
-   newLink.href = bundleName;
-   headTag.appendChild(newLink);
-}
+            const headTag = this.document.getElementsByTagName('head')[0] as HTMLHeadElement;
+            const existingLink = this.document.getElementById('langCss') as HTMLLinkElement;
+            const bundleName = lang === 'ar' ?       'src/language-css/ar.scss':'src/language-css/en.scss';
+            if (existingLink) {
+            existingLink.href = bundleName;
+            } else {
+            const newLink = this.document.createElement('link');
+            newLink.rel = 'stylesheet';
+            newLink.type = 'text/scss';
+            newLink.id = 'langCss';
+            newLink.href = bundleName;
+            headTag.appendChild(newLink);
+            }
     }
 
     /**

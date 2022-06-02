@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, filter, map, Observable, of, switchMap, take, tap, throwError } from 'rxjs';
-import {  InventoryPagination, InventoryProduct } from 'app/modules/managhall/addgoods/addgoods/inventory.types';
+import {  InventoryPagination, InventoryProduct,InventoryCategory } from 'app/modules/managhall/addgoods/addgoods/inventory.types';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +10,7 @@ export class InventoryService
 {
     // Private
     // private _brands: BehaviorSubject<InventoryBrand[] | null> = new BehaviorSubject(null);
-    // private _categories: BehaviorSubject<InventoryCategory[] | null> = new BehaviorSubject(null);
+    private _categories: BehaviorSubject<InventoryCategory[] | null> = new BehaviorSubject(null);
     private _pagination: BehaviorSubject<InventoryPagination | null> = new BehaviorSubject(null);
     private _product: BehaviorSubject<InventoryProduct | null> = new BehaviorSubject(null);
     private _products: BehaviorSubject<InventoryProduct[] | null> = new BehaviorSubject(null);
@@ -39,10 +39,10 @@ export class InventoryService
     /**
      * Getter for categories
      */
-    // get categories$(): Observable<InventoryCategory[]>
-    // {
-    //     return this._categories.asObservable();
-    // }
+    get categories$(): Observable<InventoryCategory[]>
+    {
+        return this._categories.asObservable();
+    }
 
     /**
      * Getter for pagination
@@ -103,14 +103,14 @@ export class InventoryService
     /**
      * Get categories
      */
-    // getCategories(): Observable<InventoryCategory[]>
-    // {
-    //     return this._httpClient.get<InventoryCategory[]>('api/apps/ecommerce/inventory/categories').pipe(
-    //         tap((categories) => {
-    //             this._categories.next(categories);
-    //         })
-    //     );
-    // }
+    getCategories(): Observable<InventoryCategory[]>
+    {
+        return this._httpClient.get<InventoryCategory[]>('api/apps/ecommerce/inventory/categories').pipe(
+            tap((categories) => {
+                this._categories.next(categories);
+            })
+        );
+    }
 
     /**
      * Get products
@@ -437,4 +437,45 @@ export class InventoryService
             ))
         );
     }*/
+    //  /**
+    //   *   * Update the avatar of the given contact  *
+    //  * @param id
+    //  * @param avatar
+    //  */
+      uploadAvatar(id: string, avatar: File): Observable<InventoryProduct>
+      {
+          return this.products$.pipe(
+              take(1),
+              switchMap(products => this._httpClient.post<InventoryProduct>('api/apps/products/avatar', {
+                  id,
+                  avatar
+              }, {
+                  headers: {
+                      // eslint-disable-next-line @typescript-eslint/naming-convention
+                      'Content-Type': avatar.type
+                  }
+              }).pipe(
+                  map((updatedproduct) => {
+                      // Find the index of the updated contact
+                      const index = products.findIndex(item => item.id === id);
+                      // Update the contact
+                      products[index] = updatedproduct;
+                      // Update the contacts
+                      this._products.next(products);
+                      // Return the updated contact
+                      return updatedproduct;
+                  }),
+                  switchMap(updatedproduct => this.product$.pipe(
+                      take(1),
+                      filter(item => item && item.id === id),
+                      tap(() => {
+                          // Update the contact if it's selected
+                          this._product.next(updatedproduct);
+                          // Return the updated contact
+                          return updatedproduct;
+                      })
+                  ))
+              ))
+          );
+      }
 }

@@ -14,6 +14,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FuseCardModule } from '@fuse/components/card';
+import { SwiperModule } from 'swiper/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TranslocoModule } from '@ngneat/transloco';
+import { LanguagesModule } from 'app/layout/common/languages/languages.module';
+
+
+
+
 
 @NgModule({
     declarations: [
@@ -32,8 +41,12 @@ import { FuseCardModule } from '@fuse/components/card';
         MatProgressBarModule,
         MatTooltipModule,
         FuseCardModule,
-        SharedModule
-    ]
+        CommonModule,
+        FormsModule,
+        TranslocoModule,
+        LanguagesModule,
+        SwiperModule
+        ],
 })
 export class LandingHomeModule
 {

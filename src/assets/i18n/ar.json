@@ -6,7 +6,7 @@
     "Addgoodsstore":"إضافة بضائع",
     "Addoutgoingmer": "إضافة بضائع خارجة",
     "Addgoodshall":"إضافة بضائع",
-    "Addorder":"طلب بضاعة",
+    "Addorder":"إضافة طلب",
     "Addscale":"إضافة مسطرة",
     "Storehouse":"المستودعات",
     "Name":"الاسم",
@@ -71,7 +71,24 @@
     "Search hall":"البحث عن الصالة",
     "contacts":"مستخدم",
     "contact":"مستخدم",
-    "no contacts":"لا يوجد مستخدمين"
+    "no contacts":"لا يوجد مستخدمين",
+    "Orders":"طلبات",
+    "Searchorders":"البحث عن طلب",
+    "orderstatus":"حالة الطلب",
+    "Ordersupdated":"تحديث الطلب",
+    "TherearenoOrders":"لا يوجد طلبات",
+    "welecamtoAlraed":"اهلا بكم في معرض الرائد",
+    "login":"تسجيل دخول",
+    "Seemore":"المزيد",
+    "enjoyyoureyes":"استمتع بنظرك",
+    "All": "الكل",
+    "Sofa":"صوفيات",
+    "Roomfamily":"غرف العائلة",
+    "Room":"غرف",
+    "ProductName":"اسم المنتج",
+    "NameHall":"اسم الصالة",
+    "Goodstatus":"حالة البضاعة",
+    "GoodsHall":"بضائع الصالة"
 
 
 

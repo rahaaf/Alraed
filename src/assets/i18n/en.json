@@ -71,7 +71,22 @@
     "Search hall":"Search hall",
     "contacts":"contacts",
     "contact":"contact",
-    "no contacts":"no contacts"
-
-
+    "no contacts":"no contacts",
+    "Orders":"Orders",
+    "Searchorders":"Search orders",
+    "orderstatus":"Orders status",
+    "Ordersupdated":"Orders updated",
+    "TherearenoOrders":"There are no Orders",
+    "welecamtoAlraed":"welecam to Alraed",
+    "login":"Login",
+    "Seemore":"See more",
+    "enjoyyoureyes":"enjoy your eyes",
+    "All": "All",
+    "Sofa":"Sofa",
+    "Roomfamily":"Room family",
+    "Room":"Room",
+    "ProductName":"Product Name",
+     "NameHall":"Name Hall",
+     "Goodstatus":"Goods status",
+     "GoodsHall":"Goods Hall"
 }

@@ -10,7 +10,7 @@ import { InitialDataResolver } from 'app/app.resolvers';
 export const appRoutes: Route[] = [
 
     // Redirect empty path to 'home'
-    {path: '', pathMatch : 'full', redirectTo: 'storehouse'},
+    {path: '', pathMatch : 'full', redirectTo: 'home'},
 
     // Redirect signed in user to the '/storehouse'
     //
@@ -106,7 +106,7 @@ export const appRoutes: Route[] = [
         },
         children   : [
             {path: 'addedgoods', loadChildren: () => import('app/modules/managhall/addgoods/ecommerce.module').then(g => g.ECommerceModule)},
-            {path: 'addorder', loadChildren: () => import('app/modules/managhall/addordergoods/ecommerce.module').then(m => m.ECommerceModule)},
+            {path: 'addorder', loadChildren: () => import('app/modules/managhall/addorder/ecommerce.module').then(m => m.ECommerceModule)},
             {path: 'addscale', loadChildren: () => import('app/modules/managhall/addscale/ecommerce.module').then(m => m.ECommerceModule)},
                   ]
     }

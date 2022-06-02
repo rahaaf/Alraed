@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
 import { InventoryService } from 'app/modules/managhall/addgoods/addgoods/inventory.service';
-import { InventoryPagination, InventoryProduct } from 'app/modules/managhall/addgoods/addgoods/inventory.types';
+import { InventoryPagination, InventoryProduct, InventoryCategory } from 'app/modules/managhall/addgoods/addgoods/inventory.types';
 
 @Injectable({
     providedIn: 'root'
@@ -54,10 +54,10 @@ export class InventoryCategoriesResolver
      * @param route
      * @param state
      */
-    // resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<InventoryCategory[]>
-    // {
-    //     return this._inventoryService.getCategories();
-    // }
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<InventoryCategory[]>
+    {
+        return this._inventoryService.getCategories();
+    }
 }
 
 @Injectable({

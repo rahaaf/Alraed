@@ -1,12 +1,14 @@
+import { TypeProduct } from 'app/modules/landing/home/enum';
+
 export interface InventoryProduct
 {
     id: string;
-    // category?: string;
+    category?: string;
     name: string;
     namehall: string;
     description?: string;
-    spacetotal: number;
-    spacestock: number;
+    // spacetotal?: number;
+    // spacestock?: number;
     address: string;
     // tags?: string[];
     // sku?: string | null;
@@ -18,11 +20,13 @@ export interface InventoryProduct
     price: number;
     // basePrice: number;
     // taxPercent: number;
-     phone: number;
+     phone?: number;
     // weight: number;
     // thumbnail: string;
-    images: string;
+    avatar?: string | null;
+    background?: string | null;
     active: boolean;
+    // type: TypeProduct;
 }
 
 export interface InventoryPagination
@@ -35,13 +39,13 @@ export interface InventoryPagination
     endIndex: number;
 }
 
-// export interface InventoryCategory
-// {
-//     id: string;
-//     parentId: string;
-//     name: string;
-//     slug: string;
-// }
+export interface InventoryCategory
+{
+    id: string;
+    parentId: string;
+    name: string;
+    slug: string;
+}
 
 // export interface InventoryBrand
 // {

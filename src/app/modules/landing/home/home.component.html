@@ -1,22 +1,40 @@
-<div class="flex flex-col flex-auto min-w-0">
-
-    <!-- Header -->
-    <div class="flex  sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
-        <div class="flex-1 min-w-0">
-            <!-- Breadcrumbs -->
-            <div class="flex flex-wrap items-center font-medium">
-                <div>
-                    <a class="whitespace-nowrap text-primary-500">User Interface</a>
-                </div>
-            </div>
-            <!-- Title -->
-            <div class="mt-2">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
-                    Furniture Gallery
-                </h2>
-            </div>
-        </div>
+<div class="parent ">
+    <swiper
+    style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff; width: 100%; height: 50%;"
+      [loop]="true"
+      [spaceBetween]="1"
+      [navigation]="true"
+      [thumbs]="{ swiper: thumbsSwiper }"
+      class="mySwiper2 "
+  >
+    <ng-template  swiperSlide *ngFor="let item of items" >
+     <div class="w-full object-cover max-w-full" >
+        <img src="./assets/images/caru/{{item}}.jpg"/>
+     </div>
+     <div class="lang" >
+        <languages></languages>
     </div>
+     <div class="overlay" style="z-index:99999;">
+        <h1 class="title">{{('welecamtoAlraed' | transloco)}}</h1>
+        <p class="font-semibold m-2">{{('enjoyyoureyes' | transloco)}}</p>
+        <button class="btn" mat-button  routerLink="/signed-in-redirect">{{('login' | transloco)}}</button>
+    </div>
+    </ng-template>
+
+  </swiper>
+  <!-- <swiper
+      (swiper)="thumbsSwiper = $event"
+      [loop]="true"
+      [spaceBetween]="10"
+      [slidesPerView]="4"
+      [freeMode]="true"
+      [watchSlidesProgress]="true"
+      class="mySwiper"
+    >
+    <ng-template swiperSlide *ngFor="let item of items">
+        <img src="./assets/images/sofa/{{item}}.jpg"/>
+    </ng-template>
+    </swiper>` -->
 
     <!-- Main -->
     <div class="flex-auto p-6 sm:p-10">
@@ -30,216 +48,29 @@
                     <mat-button-toggle
                         class="m-2"
                         [value]="filter">
-                        <span class="text-secondary">{{filter | titlecase}}</span>
-                        <span class="ml-1.5 font-medium text-secondary">({{numberOfCards[filter]}})</span>
+                        <span class="text-secondary">{{filter | titlecase | transloco}}</span>
+                        <!-- <span class="ml-1.5 font-medium text-secondary">({{numberOfCards[filter]}})</span> -->
                     </mat-button-toggle>
                 </ng-container>
             </mat-button-toggle-group>
         </div>
 
-        <div class="flex flex-wrap items-start w-full max-w-400 -m-4">
-
-            <!-- Card #1 -->
-            <fuse-card class="flex flex-col max-w-80 w-full filter-article">
+        <div class="card">
+            <fuse-card class="flex flex-col max-w-80 w-full filter-sofa filter-roomfamily" *ngFor="let item of products">
+               <div class="container">
                 <img
-                    class="object-cover"
-                    src="assets/images/cards/01-320x200.jpg"
-                    alt="Card cover image">
-                <div class="m-8">
-                    <div class="text-2xl font-semibold leading-tight">Most beautiful and quite places to see</div>
-                    <div class="mt-4">From rocky mountains to crystal clear lakes, there are the places you must see and enjoy.</div>
-                </div>
+                class="image object-cover"
+                src="{{item.avatar}}"
+                alt="Card cover image">
+                <div class="text-lg mt-4 text-center"> {{('Price: '|transloco)}}: {{item.price}}</div>
+            <div class="middle m-8">
+                <div class="text leading-tight">{{('NameHall: ' | transloco)}}: {{item.namehall}}</div>
+                <div class="text mt-2"> {{('Address: ' |transloco)}}:{{item.address}}</div>
+                <div class="text mt-2"> {{('ProductName: '|transloco)}}{{(item.name)}}</div>
+            </div>
+               </div>
             </fuse-card>
-
-
-            <!-- Card #2 -->
-            <fuse-card class="flex flex-col max-w-80 w-full filter-article">
-                <img
-                    class="object-cover"
-                    src="assets/images/cards/02-320x200.jpg"
-                    alt="Card cover image">
-                <div class="m-8">
-                    <div class="text-2xl font-semibold leading-tight">Rocky mountain tops</div>
-                    <div class="text-secondary text-md mt-1">Updated with 20 new locations</div>
-                    <div class="mt-4">From rocky mountains to crystal clear lakes, there are the places you must see and enjoy.</div>
-                </div>
-            </fuse-card>
-
-
-            <!-- Card #3 - Flippable card -->
-            <fuse-card
-                class="flex flex-col max-w-80 w-full filter-article filter-interactive"
-                [flippable]="true"
-                [face]="'front'"
-                #flippableCard01="fuseCard">
-                <ng-container fuseCardFront>
-                    <img
-                        class="object-cover"
-                        src="assets/images/cards/03-320x200.jpg"
-                        alt="Card cover image">
-                    <div class="m-8 mb-4">
-                        <div class="text-2xl font-semibold leading-tight">Most beautiful and quite places to see</div>
-                        <div class="mt-4">From rocky mountains to crystal clear lakes, there are the places you must see and enjoy.</div>
-                        <div class="mt-3 -mx-3">
-                            <button
-                                class="px-3"
-                                mat-button
-                                [color]="'primary'"
-                                (click)="flippableCard01.face = flippableCard01.face === 'front' ? 'back' : 'front'">
-                                Read More
-                            </button>
-                        </div>
-                    </div>
-                </ng-container>
-                <ng-container fuseCardBack>
-                    <div class="flex flex-col flex-auto m-4">
-                        <button
-                            class="ml-1.5"
-                            mat-icon-button
-                            (click)="flippableCard01.face = flippableCard01.face === 'front' ? 'back' : 'front'">
-                            <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
-                        </button>
-                        <div class="m-4 mt-3">
-                            <div class="text-2xl font-semibold leading-tight">
-                                Most beautiful and quite places to see
-                            </div>
-                            <div class="mt-4">
-                                From rocky mountains to crystal clear lakes, these are the places you must see and enjoy.
-                                You can bring your own food and have a little picnic on top of the amazing grasslands.
-                            </div>
-                            <div class="mt-4">
-                                From rocky mountains to crystal clear lakes, these are the places you must see and enjoy.
-                                You can bring your own food and have a little picnic on top of the amazing grasslands.
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
-            </fuse-card>
-
-            <!-- Card #5 - Expandable card -->
-            <fuse-card
-                class="flex flex-col max-w-80 w-full filter-article filter-interactive"
-                #expandableCard01="fuseCard">
-                <img
-                    class="object-cover"
-                    src="assets/images/cards/05-320x200.jpg"
-                    alt="Card cover image">
-                <div class="m-8 mb-4">
-                    <div class="text-2xl font-semibold leading-tight">Rocky mountain tops</div>
-                    <div class="text-secondary text-md mt-1">Updated with 20 new locations</div>
-                    <div class="mt-4">From rocky mountains to crystal clear lakes, there are the places you must see and enjoy.</div>
-                    <div class="mt-3 -mx-3">
-                        <button
-                            class="px-3"
-                            mat-button
-                            [color]="'primary'"
-                            (click)="expandableCard01.expanded = !expandableCard01.expanded">
-                            <span class="mr-1">Details</span>
-                            <mat-icon
-                                class="icon-size-5 transition-transform ease-in-out duration-150 rotate-0"
-                                [ngClass]="{'rotate-180': expandableCard01.expanded}"
-                                [svgIcon]="'heroicons_solid:chevron-down'"></mat-icon>
-                        </button>
-                    </div>
-                </div>
-
-                <ng-container fuseCardExpansion>
-                    <div class="m-8 mt-0">
-                        <div class="flex items-baseline">
-                            <div class="mr-2">Open now:</div>
-                            <div class="text-secondary">08:00AM - 09:00PM</div>
-                        </div>
-                        <div class="flex items-baseline mt-1">
-                            <div class="mr-2">Entrance fee:</div>
-                            <div class="text-secondary">$20 (USD)</div>
-                        </div>
-                    </div>
-                </ng-container>
-            </fuse-card>
-
-            <!-- Card #6 -->
-            <fuse-card class="flex flex-col max-w-80 w-full filter-article">
-                <img
-                    class="object-cover"
-                    src="assets/images/cards/03-320x200.jpg"
-                    alt="Card cover image">
-                <div class="m-8">
-                    <div class="text-md font-semibold leading-none tracking-wide text-primary mb-1">TRAVEL</div>
-                    <div class="text-2xl font-semibold leading-tight">Most beautiful and quite places to see</div>
-                    <div class="flex items-center mt-6">
-                        <img
-                            class="w-10 h-10 rounded-full"
-                            src="assets/images/cards/avatar-400x400.jpg"
-                            alt="Card cover image">
-                        <div class="flex flex-col ml-3">
-                            <span class="font-medium leading-none">Galen Lewis</span>
-                            <span class="text-sm text-secondary leading-none mt-1">23 hours ago</span>
-                        </div>
-                    </div>
-                </div>
-            </fuse-card>
-
-
-            <!-- Card #7 -->
-            <fuse-card class="flex flex-col max-w-80 w-full filter-article">
-                <img
-                    class="object-cover"
-                    src="assets/images/cards/06-320x200.jpg"
-                    alt="Card cover image">
-                <div class="m-8 text-2xl font-semibold leading-tight">Most beautiful and quite places to see</div>
-            </fuse-card>
-
-
-            <!-- Card #8 -->
-            <fuse-card class="flex flex-col max-w-80 w-full filter-article">
-                <img
-                    class="object-cover"
-                    src="assets/images/cards/07-320x200.jpg"
-                    alt="Card cover image">
-                <div class="m-8">From rocky mountains to crystal clear lakes, there are the places you must see and enjoy.</div>
-            </fuse-card>
-
-
-            <!-- Card #9 -->
-            <fuse-card class="flex flex-col max-w-80 w-full filter-article">
-                <img
-                    class="object-cover"
-                    src="assets/images/cards/08-320x200.jpg"
-                    alt="Card cover image">
-                <div class="m-8">
-                    <div class="text-2xl font-semibold leading-tight">Rocky mountain tops</div>
-                    <div class="text-secondary text-md mt-1">Updated with 20 new locations</div>
-                </div>
-            </fuse-card>
-
-            <!-- Card #17 -->
-            <fuse-card class="flex flex-col md:flex-row max-w-80 md:max-w-160 w-full filter-article">
-                <div class="flex-0 w-80 md:w-64">
-                    <img
-                        class="w-full h-full object-cover"
-                        src="assets/images/cards/11-512x512.jpg"
-                        alt="Card cover image">
-                </div>
-                <div class="flex flex-col flex-auto m-8 mb-4">
-                    <div class="text-2xl font-semibold leading-tight">Mountain tops and clear lakes</div>
-                    <div class="text-secondary font-medium text-md mt-1">Updated with 20 new locations</div>
-                    <div class="mt-4">
-                        From rocky mountains to crystal clear lakes, these are the places you must see and enjoy.
-                        You can bring your own food and have a little picnic on top of the amazing grasslands.
-                    </div>
-                    <div class="mt-3 -mx-3">
-                        <button
-                            class="px-3"
-                            mat-button
-                            [color]="'primary'"
-                            [routerLink]="['./']">
-                            Read More
-                        </button>
-                    </div>
-                </div>
-            </fuse-card>
-        </div>
-
+         </div>
+        <button mat-button class="prim">{{('Seemore' | transloco)}}</button>
     </div>
-
 </div>

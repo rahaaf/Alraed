@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { debounceTime, map, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { InventoryPagination, InventoryProduct } from 'app/modules/managhall/addgoods/addgoods/inventory.types';
+import { InventoryCategory, InventoryPagination, InventoryProduct } from 'app/modules/managhall/addgoods/addgoods/inventory.types';
 import { InventoryService } from 'app/modules/managhall/addgoods/addgoods/inventory.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -39,14 +39,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class InventoryListComponent implements OnInit, AfterViewInit, OnDestroy
 {
+    @ViewChild('avatarFileInput') private _avatarFileInput: ElementRef;
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
 
     products$: Observable<InventoryProduct[]>;
+    /* avatar: any; */
 
     /* brands: InventoryBrand[];
-    categories: InventoryCategory[];
     filteredTags: InventoryTag[]; */
+    categories: InventoryCategory[];
     flashMessage: 'success' | 'error' | null = null;
     isLoading: boolean = false;
     pagination: InventoryPagination;
@@ -91,12 +93,12 @@ export class InventoryListComponent implements OnInit, AfterViewInit, OnDestroy
         // Create the selected product form
         this.selectedProductForm = this._formBuilder.group({
             id               : [''],
-            /* category         : [''], */
+            category         : [''],
             name             : ['', [Validators.required]],
             description      : [''],
             /* tags             : [[]], */
             /* sku              : [''], */
-            namestore          : ['', [Validators.required]],
+            namehall          : ['', [Validators.required]],
             /* brand            : [''], */
             /* vendor           : [''], */
             stock            : [''],
@@ -105,9 +107,9 @@ export class InventoryListComponent implements OnInit, AfterViewInit, OnDestroy
             /* spacetotal        : [''],
             spacestock       : [''],
             phone            : [''], */
-            /* thumbnail        : [''], */
+            background         : [''],
             /* weight           : [''],*/
-            images           : [''],
+            avatar             : [null],
             /* currentImageIndex: [0], // Image index that is currently being viewed */
             active           : [false]
         });
@@ -122,7 +124,7 @@ export class InventoryListComponent implements OnInit, AfterViewInit, OnDestroy
 
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
-            });
+            }); */
 
         // Get the categories
         this._inventoryService.categories$
@@ -134,7 +136,7 @@ export class InventoryListComponent implements OnInit, AfterViewInit, OnDestroy
 
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
-            }); */
+            });
 
         // Get the pagination
         this._inventoryService.pagination$
@@ -193,21 +195,50 @@ export class InventoryListComponent implements OnInit, AfterViewInit, OnDestroy
             .subscribe();
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    uploadImage(f: NgForm) {
-        const myFormData = new FormData();
-            const headers = new HttpHeaders();
-          headers.append('Content-Type', 'multipart/form-data');
-          headers.append('Accept', 'application/json');
-          myFormData.append('images', this.filedata);
-        this.http.post('api/apps/ecommerce/inventory/product', myFormData, {
-  headers: headers
-}).subscribe((data) => {
-          console.log(data);
-      });
-      console.log(myFormData);
+  /* *
+     * Upload avatar
+     *
+     * @param fileList
+     */
+   uploadAvatar(fileList: FileList): void
+    {
+        // Return if canceled
+        if ( !fileList.length )
+        {
+            return;
+        }
 
-     }
+        const allowedTypes = ['image/jpeg', 'image/png'];
+        const file = fileList[0];
+
+        // Return if the file is not allowed
+        if ( !allowedTypes.includes(file.type) )
+        {
+            return;
+        }
+
+        // Upload the avatar
+        this._inventoryService.uploadAvatar(this.selectedProductForm.get('id').value, file).subscribe();
+    }
+
+     /* *
+         * Remove the avatar
+     */
+      removeAvatar(): void
+    {
+        // Get the form control for 'avatar'
+        const avatarFormControl = this.selectedProductForm.get('avatar');
+
+        // Set the avatar as null
+        avatarFormControl.setValue(null);
+
+        // Set the file input value as null
+        this._avatarFileInput.nativeElement.value = null;
+
+        // Update the contact
+        this.selectedProductForm.get('avatar').enable = null;
+    }
+
     /**
      * After view init
      */
@@ -305,7 +336,7 @@ export class InventoryListComponent implements OnInit, AfterViewInit, OnDestroy
     /**
      * Cycle through images of selected product
      */
-    cycleImages(forward: boolean = true): void
+    /* cycleImages(forward: boolean = true): void
     {
         // Get the image count and current image index
         const count = this.selectedProductForm.get('images').value.length;
@@ -325,7 +356,7 @@ export class InventoryListComponent implements OnInit, AfterViewInit, OnDestroy
         {
             this.selectedProductForm.get('currentImageIndex').setValue(prevIndex);
         }
-    }
+    } */
 
     /**
      * Toggle the tags edit mode

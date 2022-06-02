@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { assign, cloneDeep } from 'lodash-es';
 import { FuseMockApiService, FuseMockApiUtils } from '@fuse/lib/mock-api';
 import { brands as brandsData, categories as categoriesData, products as productsData, tags as tagsData, vendors as vendorsData } from 'app/mock-api/apps/ecommerce/inventory/data';
+import { from, map } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -162,23 +163,24 @@ export class ECommerceInventoryMockApi
                 // Generate a new product
                 const newProduct = {
                     id         : FuseMockApiUtils.guid(),
-                    category   : '',
+                    namehall    : '',
                     name       : 'A New Product',
                     description: '',
-                    tags       : [],
-                    sku        : '',
-                    barcode    : '',
-                    brand      : '',
-                    vendor     : '',
-                    stock      : '',
-                    reserved   : '',
-                    cost       : '',
-                    basePrice  : '',
-                    taxPercent : '',
+                    //  tags       : [],
+                    category       : '',
+                    address       : '',
+                    // barcode    : '',
+                    // brand      : '',
+                    // vendor     : '',
+                    stock        : '',
+                    phone        : '',
+                    // cost       : '',
+                    // basePrice  : '',
+                    // taxPercent : '',
                     price      : '',
-                    weight     : '',
-                    thumbnail  : '',
-                    images     : [],
+                    // weight     : '',
+                    background  : '',
+                    avatar      : null,
                     active     : false
                 };
 
@@ -338,5 +340,78 @@ export class ECommerceInventoryMockApi
         this._fuseMockApiService
             .onGet('api/apps/ecommerce/inventory/vendors')
             .reply(() => [200, cloneDeep(this._vendors)]);
+
+              // -----------------------------------------------------------------------------------------------------
+        // @ Avatar - POST
+        // -----------------------------------------------------------------------------------------------------
+
+        /**
+         * Read the given file as mock-api url
+         *
+         * @param file
+         */
+        const readAsDataURL = (file: File): Promise<any> =>
+
+        // Return a new promise
+        new Promise((resolve, reject) => {
+
+            // Create a new reader
+            const reader = new FileReader();
+
+            // Resolve the promise on success
+            reader.onload = (): void => {
+                resolve(reader.result);
+            };
+
+            // Reject the promise on error
+            reader.onerror = (e): void => {
+                reject(e);
+            };
+
+            // Read the file as the
+            reader.readAsDataURL(file);
+        })
+    ;
+
+
+            this._fuseMockApiService
+            .onPost('api/apps/products/avatar')
+            .reply(({request}) => {
+
+                // Get the id and avatar
+                const id = request.body.id;
+                const avatar = request.body.avatar;
+
+                // Prepare the updated contact
+                let updatedproduct: any = null;
+
+                // In a real world application, this would return the path
+                // of the saved image file (from host, S3 bucket, etc.) but,
+                // for the sake of the demo, we encode the image to base64
+                // and return it as the new path of the uploaded image since
+                // the src attribute of the img tag works with both image urls
+                // and encoded images.
+                return from(readAsDataURL(avatar)).pipe(
+                    map((path) => {
+
+                        // Find the contact and update it
+                        this._products.forEach((item, index, products) => {
+
+                            if ( item.id === id )
+                            {
+                                // Update the avatar
+                                products[index].avatar = path;
+
+                                // Store the updated contact
+                                updatedproduct = products[index];
+                            }
+                        });
+
+                        // Return the response
+                        return [200, updatedproduct];
+                    })
+                );
+            });
     }
-}
+    }
+
